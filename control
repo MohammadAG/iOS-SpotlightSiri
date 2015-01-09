@@ -1,0 +1,9 @@
+Package: com.mohammadag.spotsiri
+Name: SpotlightSiri
+Depends: mobilesubstrate
+Version: 1.0
+Architecture: iphoneos-arm
+Description: Use Siri by prefixing Spotlight searches with "Siri"
+Maintainer: Mohammad Abu-Garbeyyeh
+Author: Mohammad Abu-Garbeyyeh
+Section: Tweaks
