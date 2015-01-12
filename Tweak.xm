@@ -20,8 +20,6 @@
 - (void)_searchFieldEditingChanged;
 @end
 
-static SpringBoard *springBoard = nil;
-
 %hook SBSearchViewController
 
 - (void)_searchFieldReturnPressed {
@@ -34,7 +32,7 @@ static SpringBoard *springBoard = nil;
                                          stringByReplacingOccurrencesOfString:@"siri" withString:@""];
         if (![[searchStringWithoutSiri stringByReplacingOccurrencesOfString:@" " withString:@""] isEqual:@""]) {
             NSArray *myStrings = [NSArray arrayWithObjects:searchStringWithoutSiri, nil];
-            [springBoard setNextAssistantRecognitionStrings:myStrings];
+            [(SpringBoard *)[UIApplication sharedApplication] setNextAssistantRecognitionStrings:myStrings];
         }
         SBAssistantController *assistantController = [%c(SBAssistantController) sharedInstance];
         [assistantController handleSiriButtonDownEventFromSource:1 activationEvent:1];
@@ -45,15 +43,6 @@ static SpringBoard *springBoard = nil;
     } else {
         %orig;
     }
-}
-
-%end
-
-%hook SpringBoard
-
-- (void)applicationDidFinishLaunching:(id)fp8 {
-    %orig;
-    springBoard = self;
 }
 
 %end
